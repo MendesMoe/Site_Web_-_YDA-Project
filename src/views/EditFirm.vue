@@ -194,7 +194,7 @@ export default {
     },
 
     async editFirm() {
-      if (this.role.value == "admin") {
+      if (this.role.value === "admin") {
         const url = `http://127.0.0.1:8000/api/firms/${this.id}`;
 
         const options = {

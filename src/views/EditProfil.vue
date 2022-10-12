@@ -59,7 +59,12 @@
           </div>
           <div class="form_p2">
             <label for="phone">Téléphone</label>
-            <input type="tel" id="phone" v-model="phone" />
+            <input
+              type="tel"
+              id="phone"
+              v-model="phone"
+              placeholder="Telephone"
+            />
           </div>
         </div>
 

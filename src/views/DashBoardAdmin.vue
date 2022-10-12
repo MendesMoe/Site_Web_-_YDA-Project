@@ -1,7 +1,9 @@
 <template>
-  <NavbarreAdmin />
-  <AllOrders />
-  <Footer />
+  <div>
+    <NavbarreAdmin></NavbarreAdmin>
+    <AllOrders></AllOrders>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>

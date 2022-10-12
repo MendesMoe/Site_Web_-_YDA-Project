@@ -70,6 +70,7 @@ export default {
       console.log(response);
       // Création de la const data qui nous permet la récupération des data stockées dans l'API
       const data = await response.json();
+      console.log("response connexion");
       console.log(data);
       this.success = data.status_code;
       this.role = data.role;

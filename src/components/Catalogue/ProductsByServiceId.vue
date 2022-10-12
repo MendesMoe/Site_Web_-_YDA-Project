@@ -48,7 +48,7 @@ export default {
 
     let cart = JSON.parse(localStorage.getItem("@cart"));
     if (Array.isArray(cart)) {
-      console.log("TEST---------------");
+      console.log("PRoduct by service CART");
       this.cart = cart;
     }
   },

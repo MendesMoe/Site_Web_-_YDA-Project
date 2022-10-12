@@ -109,6 +109,7 @@ export default {
     console.log(response);
     // la récupération des data stockées dans l'API
     const data = await response.json();
+    console.log("RESPONSE REQUETE ALL FIRMS");
     console.log(data);
 
     this.firmList = data;
