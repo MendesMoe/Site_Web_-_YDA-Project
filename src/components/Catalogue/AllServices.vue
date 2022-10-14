@@ -1,14 +1,16 @@
 <template>
-  <h1>Services</h1>
-  <!--component de selection du type-->
-  <SelectType @change="getOptionValue" />
-  <!--v-for pour afficher tout les services en BDD -->
-  <div class="groupe_service_card">
-    <Service
-      v-for="(element, index) in filterTypeId"
-      :key="index"
-      :values="element"
-    ></Service>
+  <div class="content-page-services">
+    <h2 class="title-page">Services</h2>
+    <!--component de selection du type-->
+    <SelectType @change="getOptionValue" />
+    <!--v-for pour afficher tout les services en BDD -->
+    <div class="groupe_service_card">
+      <Service
+        v-for="(element, index) in filterTypeId"
+        :key="index"
+        :values="element"
+      ></Service>
+    </div>
   </div>
 </template>
 <script>
@@ -80,6 +82,16 @@ export default {
 </script>
 
 <style scoped>
+.content-page-services {
+  width: 100%;
+  height: 100%;
+  padding: 2% 2%;
+  justify-content: center;
+  text-align: center;
+}
+.title-page {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 .groupe_service_card {
   display: flex;
   flex-wrap: wrap;

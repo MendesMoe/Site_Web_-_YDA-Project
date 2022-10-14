@@ -16,6 +16,7 @@ import DashMember from "../views/DashMember.vue";
 import EditProfilMember from "../views/EditProfilMember.vue";
 
 const routes = [
+  /*route de connexion*/
   {
     path: "/",
     name: "Connexion",
@@ -30,12 +31,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
-  /*route de connexion*/
-  {
-    path: "/connexion",
-    name: "Connexion",
-    component: Connexion,
-  },
+
   /*route pour ajouter de nouveaux types, services ou produits*/
   {
     path: "/addService",

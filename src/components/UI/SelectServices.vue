@@ -1,6 +1,11 @@
 <template>
   <!--v-for sur le select pour afficher tout les  services dispo en BDD -->
-  <select name="service_id" id="service" v-model="select">
+  <select
+    class="select-component"
+    name="service_id"
+    id="service"
+    v-model="select"
+  >
     <option
       v-for="(element, index) in services"
       :key="index"
@@ -40,3 +45,11 @@ export default {
   },
 };
 </script>
+<style>
+.select-component {
+  font-size: 16px;
+  padding: 2px;
+  border-radius: 9px;
+  margin-bottom: 5px;
+}
+</style>

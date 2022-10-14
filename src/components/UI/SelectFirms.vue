@@ -1,6 +1,6 @@
 <template>
   <!--v-for sur le select pour afficher tout les  services dispo en BDD -->
-  <select name="firm_id" id="firm" v-model="select">
+  <select class="select-component" name="firm_id" id="firm" v-model="select">
     <option
       v-for="(element, index) in firms"
       :key="index"
@@ -42,8 +42,11 @@ export default {
 </script>
 
 <style scoped>
-
-select {
-  max-width: inherit;
+.select-component {
+  margin-top: 5px;
+  font-size: 16px;
+  padding: 2px;
+  border-radius: 9px;
+  margin-bottom: 5px;
 }
 </style>

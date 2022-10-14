@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="$route.name !== 'Connexion'">
     <div class="menu-left">
       <MenuLeft />
     </div>
@@ -7,6 +7,9 @@
       <NavTopDeconnexion />
       <router-view />
     </div>
+  </div>
+  <div class="container" v-else>
+    <router-view />
   </div>
 </template>
 

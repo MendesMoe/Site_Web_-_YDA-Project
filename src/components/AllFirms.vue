@@ -30,8 +30,14 @@
       <!-- affichage des resultats -->
       <tbody v-for="(entreprise, index) in filteredList" :key="index">
         <tr>
-          <td @click="getUsersByFirm(entreprise.id)">
-            <img :src="`http://localhost:8000/img/logos/` + entreprise.logo" />
+          <td>
+            <router-link
+              :to="{ name: 'Users', params: { firmId: entreprise.id } }"
+            >
+              <img
+                :src="`http://localhost:8000/img/logos/` + entreprise.logo"
+              />
+            </router-link>
           </td>
 
           <td>{{ entreprise.name }}</td>
@@ -47,7 +53,10 @@
           <td>{{ entreprise.visit_day_2 }}, {{ entreprise.time_2 }} H</td>
 
           <td v-if="this.role.value == 'admin'">
-            <i @click="getFirmById(entreprise.id)" class="fas fa-pen"></i>
+            <router-link
+              :to="{ name: 'EditFirm', params: { firmId: entreprise.id } }"
+              ><i class="fas fa-pen"></i>
+            </router-link>
 
             <i @click="deleteFirm(entreprise.id)" class="far fa-trash-alt"></i>
           </td>
@@ -97,7 +106,7 @@ export default {
     console.log("RESPONSE REQUETE ALL FIRMS");
     console.log(data);
 
-    this.firmList = data;
+    this.firmList = data[0];
     console.log(this.firmList);
   },
   methods: {
@@ -125,6 +134,7 @@ export default {
 
     async getUsersByFirm(id) {
       this.$router.push({
+        path: "/Users",
         name: "Users",
         params: { firmId: id },
       });
@@ -204,6 +214,9 @@ i {
 
 /************** CSS SEARCH ****************/
 input[type="text"] {
-  font-size: 18px;
+  font-size: 16px;
+  padding: 2px;
+  border-radius: 9px;
+  margin-bottom: 5px;
 }
 </style>

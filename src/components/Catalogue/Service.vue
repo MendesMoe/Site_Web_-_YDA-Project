@@ -1,111 +1,114 @@
 <template>
   <div
-    v-if="radio !== 'inactif' || this.role.value !== 'member'"
-    class="service_card"
+    v-if="radio !== 'inactif' && this.role.value !== 'member'"
+    class="service-card"
   >
-    <div class="image">
-      <img :src="'http://localhost:8000/img/services/' + previewImage" />
-    </div>
-    <div class="title_description">
-      <h2>{{ name }}</h2>
+    <img
+      class="image-service"
+      :src="'http://localhost:8000/img/services/' + previewImage"
+    />
+    <div class="title-service">
+      <h3>{{ name }}</h3>
       <p class="p_container">{{ description_1 }}</p>
       <button @click="showServiceProducts(this.id)">Voir produits</button>
-      <br />
       <div v-if="this.role.value == 'admin'" class="buttonedit">
         <i class="fas fa-pen" @click="showEdit = !showEdit"></i>
 
         <i @click="deleteService()" class="far fa-trash-alt"></i>
       </div>
-    </div>
-
-    <div v-show="showEdit">
-      <form class="form" @submit.prevent="editService">
-        <div>
-          <label for="name">Nom</label>
-        </div>
-        <div>
-          <input id="name" type="text" v-model="name" name="name" />
-        </div>
-        <div class="child_top">
+      <div v-show="showEdit">
+        <form class="form" @submit.prevent="editService">
           <div>
-            <label for="email">Email</label>
+            <label for="name">Nom</label>
           </div>
           <div>
-            <input type="email" id="email" v-model="email" name="email" />
+            <input id="name" type="text" v-model="name" name="name" />
           </div>
-        </div>
-        <div class="mid_form">
-          <div class="child_mid">
+          <div class="child_top">
             <div>
-              <label for="phone">Téléphone</label>
+              <label for="email">Email</label>
             </div>
             <div>
-              <input type="tel" id="phone" name="phone" v-model="phone" />
+              <input type="email" id="email" v-model="email" name="email" />
             </div>
           </div>
-          <div class="child_mid">
-            <div>
-              <label for="categories">Categorie</label>
+          <div class="mid_form">
+            <div class="child_mid">
+              <div>
+                <label for="phone">Téléphone</label>
+              </div>
+              <div>
+                <input type="tel" id="phone" name="phone" v-model="phone" />
+              </div>
+            </div>
+            <div class="child_mid">
+              <div>
+                <label for="categories">Categorie</label>
+              </div>
+
+              <SelectType />
+            </div>
+          </div>
+          <div class="img_parent">
+            <div class="img_container">
+              <div>
+                <label for="image">Image</label>
+              </div>
+              <div>
+                <input
+                  type="file"
+                  id="image"
+                  @change="uploadImage"
+                  name="image"
+                  class="file"
+                />
+              </div>
             </div>
 
-            <SelectType />
-          </div>
-        </div>
-        <div class="img_parent">
-          <div class="img_container">
-            <div>
-              <label for="image">Image</label>
+            <div class="img_container">
+              <img :src="previewImage" class="uploading-image" />
             </div>
-            <div>
+          </div>
+          <div class="bot_container">
+            <div class="child_bot">
               <input
-                type="file"
-                id="image"
-                @change="uploadImage"
-                name="image"
-                class="file"
+                type="radio"
+                id="checkbox"
+                class="check"
+                name="status"
+                value="actif"
               />
+              <label for="checkbox">Produit actif</label>
+            </div>
+
+            <div class="child_bot">
+              <input
+                type="radio"
+                id="checkbox"
+                class="check"
+                name="status"
+                value="inactif"
+              />
+              <label for="checkbox">Produit inactif</label>
             </div>
           </div>
-
-          <div class="img_container">
-            <img :src="previewImage" class="uploading-image" />
-          </div>
-        </div>
-        <div class="bot_container">
-          <div class="child_bot">
-            <input
-              type="radio"
-              id="checkbox"
-              class="check"
-              name="status"
-              value="actif"
-            />
-            <label for="checkbox">Produit actif</label>
+          <div class="text_container">
+            <label for="description_1">Description</label>
+            <textarea
+              id="description_1"
+              v-model="description_1"
+              name="description_1"
+              class="block_area"
+            ></textarea>
           </div>
 
-          <div class="child_bot">
-            <input
-              type="radio"
-              id="checkbox"
-              class="check"
-              name="status"
-              value="inactif"
-            />
-            <label for="checkbox">Produit inactif</label>
-          </div>
-        </div>
-        <div class="text_container">
-          <label for="description_1">Description</label>
-          <textarea
-            id="description_1"
-            v-model="description_1"
-            name="description_1"
-            class="block_area"
-          ></textarea>
-        </div>
-
-        <input id="submit_btn" type="submit" value="Enregistrer modification" />
-      </form>
+          <input
+            id="submit_btn"
+            type="submit"
+            value="Enregistrer modification"
+          />
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -221,8 +224,43 @@ export default {
 </script>
 
 <style scoped>
+.service-card {
+  width: 20%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px;
+
+  border: 1px solid rgb(21, 19, 19);
+  border-radius: 11px;
+  box-shadow: 2px 6px transparent;
+  transition: linear 0.6s;
+}
+
+.service-card:hover {
+  box-shadow: 2px 6px #db9024;
+  margin: 1px 20px 20px 20px;
+}
+
+.image-service {
+  width: 100%;
+  height: 70%;
+}
+
+.title-service {
+  width: 100%;
+  height: 30%;
+  background-color: #db9024;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border-end-start-radius: 11px;
+  border-end-end-radius: 11px;
+  display: flex;
+  flex-direction: column;
+}
+
 button {
-  margin: 2%;
   border-radius: 5px;
   background-color: #ffffff;
   color: black;
@@ -235,29 +273,6 @@ img {
   border-radius: 50%;
 }
 
-.service_card {
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-content: space-around;
-  align-items: center;
-  margin: 20px;
-
-  border: 1px solid black;
-  border-radius: 15px;
-  box-shadow: 2px 6px transparent;
-  transition: linear 0.6s;
-}
-
-.service_card:hover {
-  box-shadow: 2px 6px #db9024;
-  margin: 1px 20px 20px 20px;
-}
-
-.title_description {
-  margin-left: 5%;
-}
 .buttonedit {
   display: flex;
   justify-content: center;

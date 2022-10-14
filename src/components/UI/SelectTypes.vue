@@ -1,7 +1,12 @@
  <template>
   <!--v-for sur le select pour afficher tout les types de services dispo en BDD -->
 
-  <select name="type_id" id="categories" @change="handleChange">
+  <select
+    class="select-component"
+    name="type_id"
+    id="categories"
+    @change="handleChange"
+  >
     <option v-for="(element, index) in type" :key="index" :value="element.id">
       {{ element.name }}
     </option>
@@ -42,4 +47,12 @@ export default {
   },
 };
 </script>
+<style>
+.select-component {
+  font-size: 16px;
+  padding: 2px;
+  border-radius: 9px;
+  margin-bottom: 5px;
+}
+</style>
  

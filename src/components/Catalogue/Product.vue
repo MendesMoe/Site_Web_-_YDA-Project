@@ -6,7 +6,7 @@
     <div class="image">
       <img :src="'http://localhost:8000/img/services/' + previewImage" />
     </div>
-    <div class="title_description">
+    <div>
       <h2>{{ name }}</h2>
       <p>{{ description }}</p>
       {{ price }}€
@@ -26,9 +26,9 @@
         <input id="comment" type="text" v-model="comment" />
         <label for="qt">Quantité</label>
         <input id="qt" type="number" v-model="quantity" />
-        <label for="toto"></label>
+        <label for="addcBasket"></label>
         <input
-          id="toto"
+          id="addcBasket"
           class="addToCart"
           type="submit"
           value="Ajouter au panier"
@@ -199,6 +199,21 @@ export default {
 </script>
 
 <style scoped>
+.product_card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5%;
+  padding: 1%;
+  border: 1px solid rgb(39, 38, 38);
+  border-radius: 20px;
+  box-shadow: 2px 1px 9px 0px rgb(40, 39, 39);
+}
+
+.product_card:hover {
+  box-shadow: inset 2px 1px 9px 0px black;
+}
+
 .edit_product {
   display: flex;
   flex-direction: column;

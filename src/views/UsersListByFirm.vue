@@ -1,169 +1,160 @@
 <template>
-  <NavTopDeconnexion />
-  <h2>Compte {{ this.name }}</h2>
+  <div class="content-page-users-by-firm">
+    <h3>Entreprise : {{ this.name }}</h3>
 
-  <div class="firm_details">
-    <div class="part_1">
-      <div>
-        <p>Raison Sociale :{{ this.name }}</p>
-      </div>
-      <div>
+    <div class="firm-details">
+      <div class="card">
+        <h3>Contact</h3>
+        <p>Raison Sociale : {{ this.name }}</p>
         <p>
           Adresse :
           {{ this.address }}
         </p>
-      </div>
-    </div>
-
-    <div class="part_1">
-      <div>
         <p><i class="fas fa-phone-alt"></i> {{ this.phone }}</p>
-      </div>
-      <div>
+
         <p><i class="fas fa-at"></i> {{ this.email }}</p>
-      </div>
-    </div>
 
-    <div>
-      <p>Siret : {{ this.siret }}</p>
-    </div>
-  </div>
-
-  <h2>Actualité</h2>
-  <div>
-    <div class="news">
-      <div>
-        <img :src="`http://localhost:8000/img/news/` + this.image" />
+        <p>Siret : {{ this.siret }}</p>
       </div>
-      <div>
-        <p>Actualité du moment : {{ this.title }}</p>
-        <p>{{ this.news }}</p>
-      </div>
-    </div>
-  </div>
-
-  <h2>Listes des commandes</h2>
-  <div class="orders">
-    <div class="orders_thead">
-      <div class="orders_tr">
-        <div class="orders_div_head">
-          <p class="orders_th">Commande n°</p>
-          <p class="orders_th">Statut</p>
-          <p class="orders_th">Date création</p>
-          <p class="orders_th">Date dernière modification</p>
-          <p class="orders_th">
-            Entreprises:<SelectFirms @change="getFirmValue($event)" />
-          </p>
-          <p class="orders_th">Nom salarié</p>
-          <p>Modifier statut</p>
+      <div class="card">
+        <h3>Actualité</h3>
+        <div class="news">
+          <div>
+            <img :src="`http://localhost:8000/img/news/` + this.image" />
+          </div>
+          <div>
+            <p>Actualité du moment : {{ this.title }}</p>
+            <p>{{ this.news }}</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- affichage de tous les utilisateurs -->
-
-    <div class="orders_thead" v-for="(firm, index) in usersFirms" :key="index">
-      <div class="orders_tr" v-for="(value, index) in firm.users" :key="index">
-        <div
-          class="orders_div_body"
-          v-for="(order, index) in value.orders"
-          :key="index"
-        >
-          <p class="orders_td">{{ order.id }}</p>
-          <p class="orders_td">{{ order.status }}</p>
-          <p class="orders_td">
-            {{ moment(order.created_at).format("DD MMM YYYY, HH:mm ") }}
-          </p>
-          <p class="orders_td">
-            {{ moment(order.updated_at).format("DD MMM YYYY, HH:mm ") }}
-          </p>
-          <p class="orders_td">{{ firm.name }}</p>
-          <p class="orders_td">{{ value.firstname }} {{ value.lastname }}</p>
-          <i
-            class="fas fa-pen"
-            v-show="!showEdit"
-            @click="showEdit = !showEdit"
-          ></i>
-          <form @submit.prevent="editStatus(order.id)" v-show="showEdit">
-            <select v-model="status">
-              <option value="">Statuts</option>
-              <option value="en cours">En cours</option>
-              <option value="en attente">En attente</option>
-              <option value="terminée">Terminées</option>
-            </select>
-            <button>Modifier Statut</button>
-          </form>
+    <h3>Listes des commandes</h3>
+    <div class="orders">
+      <div class="orders_thead">
+        <div class="orders_tr">
+          <div class="orders_div_head">
+            <p class="orders_th">Commande n°</p>
+            <p class="orders_th">Statut</p>
+            <p class="orders_th">Date création</p>
+            <p class="orders_th">Date dernière modification</p>
+            <p class="orders_th">
+              Entreprises:<SelectFirms @change="getFirmValue($event)" />
+            </p>
+            <p class="orders_th">Nom salarié</p>
+            <p>Modifier statut</p>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <h2>Utilisateurs</h2>
-
-  <div class="arrayUsers">
-    <table class="array">
-      <thead class="head">
-        <tr class="trHead">
-          <th>Nom :</th>
-
-          <th>Prenom :</th>
-
-          <th>Date de naissance :</th>
-
-          <th>E-mail :</th>
-
-          <th>Téléphone :</th>
-
-          <th>Role :</th>
-
-          <th>Commentaire :</th>
-
-          <th>Action :</th>
-        </tr>
-      </thead>
 
       <!-- affichage de tous les utilisateurs -->
 
-      <tbody v-for="(firm, index) in usersFirms" :key="index">
-        <tr v-for="(value, index) in firm.users" :key="index">
-          <td>{{ value.firstname }}</td>
+      <div
+        class="orders_thead"
+        v-for="(firm, index) in usersFirms"
+        :key="index"
+      >
+        <div
+          class="orders_tr"
+          v-for="(value, index) in firm.users"
+          :key="index"
+        >
+          <div
+            class="orders_div_body"
+            v-for="(order, index) in value.orders"
+            :key="index"
+          >
+            <p class="orders_td">{{ order.id }}</p>
+            <p class="orders_td">{{ order.status }}</p>
+            <p class="orders_td">
+              {{ moment(order.created_at).format("DD MMM YYYY, HH:mm ") }}
+            </p>
+            <p class="orders_td">
+              {{ moment(order.updated_at).format("DD MMM YYYY, HH:mm ") }}
+            </p>
+            <p class="orders_td">{{ firm.name }}</p>
+            <p class="orders_td">{{ value.firstname }} {{ value.lastname }}</p>
+            <i
+              class="fas fa-pen"
+              v-show="!showEdit"
+              @click="showEdit = !showEdit"
+            ></i>
+            <form @submit.prevent="editStatus(order.id)" v-show="showEdit">
+              <select v-model="status">
+                <option value="">Statuts</option>
+                <option value="en cours">En cours</option>
+                <option value="en attente">En attente</option>
+                <option value="terminée">Terminées</option>
+              </select>
+              <button>Modifier Statut</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          <td>{{ value.lastname }}</td>
+    <h3>Utilisateurs</h3>
 
-          <td>{{ value.birthday }}</td>
+    <div class="arrayUsers">
+      <table class="array">
+        <thead class="head">
+          <tr class="trHead">
+            <th>Nom :</th>
 
-          <td>{{ value.email }}</td>
+            <th>Prenom :</th>
 
-          <td>{{ value.phone }}</td>
+            <th>Date de naissance :</th>
 
-          <td>{{ value.role }}</td>
+            <th>E-mail :</th>
 
-          <td>{{ value.comments }}</td>
+            <th>Téléphone :</th>
 
-          <td>
-            <i class="fas fa-pen" @click="getUserProfil(value.id)"></i>
-            <i @click="deleteUser(value.id)" class="far fa-trash-alt"></i>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <th>Role :</th>
+
+            <th>Commentaire :</th>
+
+            <th>Action :</th>
+          </tr>
+        </thead>
+
+        <!-- affichage de tous les utilisateurs -->
+
+        <tbody v-for="(firm, index) in usersFirms" :key="index">
+          <tr v-for="(value, index) in firm.users" :key="index">
+            <td>{{ value.firstname }}</td>
+
+            <td>{{ value.lastname }}</td>
+
+            <td>{{ value.birthday }}</td>
+
+            <td>{{ value.email }}</td>
+
+            <td>{{ value.phone }}</td>
+
+            <td>{{ value.role }}</td>
+
+            <td>{{ value.comments }}</td>
+
+            <td>
+              <i class="fas fa-pen" @click="getUserProfil(value.id)"></i>
+              <i @click="deleteUser(value.id)" class="far fa-trash-alt"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script>
-import NavTopDeconnexion from "../components/NavTopDeconnexion.vue";
 import moment from "moment";
 export default {
   inject: ["role"],
-  props: {
-    firmId: String,
-  },
+  props: ["firmId"],
 
   created: function () {
     this.moment = moment;
-  },
-  components: {
-    NavTopDeconnexion: NavTopDeconnexion,
   },
 
   data() {
@@ -200,19 +191,19 @@ export default {
     // la récupération des data stockées dans l'API
     const data = await response.json();
     console.log(data);
+    console.log("props");
+    console.log(this.id);
 
-    this.usersFirms = data.tab_firms;
+    this.usersFirms = data;
 
-    const arrayFirms = data.tab_firms;
-
-    this.name = arrayFirms[0].name;
-    this.phone = arrayFirms[0].phone;
-    this.address = arrayFirms[0].address;
-    this.email = arrayFirms[0].email;
-    this.siret = arrayFirms[0].siret;
-    this.title = arrayFirms[0].title;
-    this.news = arrayFirms[0].news;
-    this.image = arrayFirms[0].image;
+    this.name = data[0].name;
+    this.phone = data[0].phone;
+    this.address = data[0].address;
+    this.email = data[0].email;
+    this.siret = data[0].siret;
+    this.title = data[0].title;
+    this.news = data[0].news;
+    this.image = data[0].image;
   },
 
   methods: {
@@ -287,6 +278,38 @@ export default {
 </script>
 
 <style scoped>
+.content-page-users-by-firm {
+  width: 100%;
+  height: 90%;
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+h3 {
+  color: #f39c11;
+}
+
+.firm-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 100%;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: 30%;
+  margin: 2%;
+}
+
+.news {
+  display: flex;
+  max-width: 80%;
+  padding: 2%;
+}
+
 .arrayUsers .array {
   border: 1px solid #bdc3d7;
   text-align: center;
@@ -333,27 +356,6 @@ i {
   width: 50px;
 }
 
-h2 {
-  color: #f39c11;
-}
-
-.firm_details {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  max-width: 100%;
-}
-
-.part_1 {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.news {
-  display: flex;
-  max-width: 80%;
-  margin-left: 9%;
-}
 .news p {
   text-align: left;
   margin-left: 1%;

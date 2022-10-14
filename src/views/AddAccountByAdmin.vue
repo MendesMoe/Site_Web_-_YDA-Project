@@ -1,167 +1,63 @@
 <template>
-  <div>
-    <!-- import de la barre de navigation -->
-    <NavTopDeconnexion />
-
-    <div class="all">
-      <!-- bouton pour affichage des formulaires -->
-      <div class="button">
-        <button
-          @click="
-            (this.showAccount = true),
-              (this.showFirmAccount = false),
-              (this.msg = false)
-          "
-          id="submit_btn"
-        >
-          Création Compte</button
-        ><button
-          @click="
-            (this.showFirmAccount = true),
-              (this.showAccount = false),
-              (this.msg = false)
-          "
-          id="submit_btn"
-          v-if="this.role.value == 'admin'"
-        >
-          Création d'entreprise
-        </button>
-      </div>
-      <!-- formulaire création de nouveau compte -->
-      <form
-        v-show="this.showAccount"
-        @submit.prevent="CreateAccountByAdmin"
-        ref="test"
+  <div class="content-page-creation">
+    <!-- bouton pour affichage des formulaires -->
+    <div class="button">
+      <button
+        @click="
+          (this.showFirmAccount = true),
+            (this.showAccount = false),
+            (this.msg = false)
+        "
+        id="submit_btn"
+        v-if="this.role.value == 'admin'"
       >
-        <!-- selection du compte à créer -->
-        <div class="select">
-          <p>Selectionez le type de compte que vous souhaitez créer :</p>
-          <select
-            @change="selectCategoryAccount($event)"
-            name="role"
-            id="add_account"
-          >
-            <option value="choix">Choix</option>
-            <option v-if="this.role.value == 'admin'" value="admin">
-              Admin
-            </option>
-            <option v-if="this.role.value == 'admin'" value="manager">
-              Manager
-            </option>
-            <option value="member">Member</option>
-          </select>
-        </div>
+        Création d'entreprise
+      </button>
+    </div>
+    <!-- formulaire création de nouveau compte -->
+    <form
+      v-show="this.showAccount"
+      @submit.prevent="CreateAccountByAdmin"
+      ref="test"
+    >
+      <!-- selection du compte à créer -->
+      <div class="select">
+        <p>Selectionez le type de compte que vous souhaitez créer :</p>
+        <select
+          @change="selectCategoryAccount($event)"
+          name="role"
+          id="add_account"
+          class="select-account"
+        >
+          <option value="choix">Selectionnez</option>
+          <option v-if="this.role.value == 'admin'" value="admin">Admin</option>
+          <option v-if="this.role.value == 'admin'" value="manager">
+            Manager
+          </option>
+          <option value="member">Member</option>
+        </select>
+      </div>
 
-        <div class="form">
-          <div
-            v-if="
-              this.accountSelect == 'admin' ||
-              this.accountSelect == 'manager' ||
-              this.accountSelect == 'member'
-            "
-          >
-            <div class="form_p1">
-              <div class="form_p2">
-                <label for="last_name">Nom : </label>
-                <input type="text" id="last_name" name="lastname" />
-              </div>
-
-              <div class="form_p2">
-                <label for="first_name">Prenom : </label>
-                <input type="text" id="first_name" name="firstname" />
-              </div>
-            </div>
-            <div class="form_p1">
-              <div class="form_p2">
-                <label for="email">E-mail : </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  v-model="inputEmail"
-                />
-              </div>
-
-              <div class="form_p2">
-                <label for="birthday">Date de naissance : </label>
-                <input type="date" id="birthday" name="birthday" />
-              </div>
-            </div>
-          </div>
-
-          <!-- champs communs comptes manager et member-->
-          <div
-            v-if="
-              this.accountSelect == 'manager' || this.accountSelect == 'member'
-            "
-          >
-            <div class="form_p1">
-              <div class="form_p2">
-                <label for="add_phone">Téléphone : </label>
-                <input type="tel" id="add_phone" name="phone" />
-              </div>
-              <div class="form_p2">
-                <label for="add_firm">Entreprise : </label>
-                <select
-                  @change="selectFirm($event)"
-                  @click="FirmChoice"
-                  name="firm_id"
-                  id="add_firm"
-                >
-                  <option
-                    v-for="(firm, index) in firmList"
-                    :key="index"
-                    :value="firm.id"
-                  >
-                    {{ firm.name }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <!-- champs spécifiques compte membre -->
-          <div v-if="this.accountSelect == 'member'">
-            <div class="form_p1">
-              <div class="form_p2">
-                <label for="avatar">Avatar :</label>
-                <img :src="avatarPicture" class="preview" alt="" />
-                <input
-                  type="file"
-                  @change="downloadAvatar"
-                  name="avatar"
-                  accept="/*"
-                  enctype="multipart/form-data"
-                />
-              </div>
-              <div class="form_p2">
-                <label for="add_comment">Commentaire :</label>
-                <textarea
-                  type="text"
-                  name="add_comment"
-                  id="add_comment"
-                  class="block_area"
-                ></textarea>
-              </div>
-            </div>
-          </div>
-
-          <div v-if="accountSelect && this.accountSelect != 'choix'">
-            <input id="submit_btn" type="submit" value="Valider" />
-          </div>
-        </div>
-      </form>
-
-      <!-- formulaire compte entreprise -->
-
-      <div class="form" v-show="this.showFirmAccount">
-        <form @submit.prevent="CreateAccountFirm">
+      <div class="form">
+        <div
+          v-if="
+            this.accountSelect == 'admin' ||
+            this.accountSelect == 'manager' ||
+            this.accountSelect == 'member'
+          "
+        >
           <div class="form_p1">
             <div class="form_p2">
-              <label for="name">Nom : </label>
-              <input type="text" id="name" name="name" />
+              <label for="last_name">Nom : </label>
+              <input type="text" id="last_name" name="lastname" />
             </div>
 
+            <div class="form_p2">
+              <label for="first_name">Prenom : </label>
+              <input type="text" id="first_name" name="firstname" />
+            </div>
+          </div>
+          <div class="form_p1">
             <div class="form_p2">
               <label for="email">E-mail : </label>
               <input
@@ -171,135 +67,210 @@
                 v-model="inputEmail"
               />
             </div>
-          </div>
 
-          <div class="form_p1">
             <div class="form_p2">
-              <label for="address">Addresse :</label>
-              <input type="text" name="address" id="address" />
+              <label for="birthday">Date de naissance : </label>
+              <input type="date" id="birthday" name="birthday" />
             </div>
+          </div>
+        </div>
 
+        <!-- champs communs comptes manager et member-->
+        <div
+          v-if="
+            this.accountSelect == 'manager' || this.accountSelect == 'member'
+          "
+        >
+          <div class="form_p1">
             <div class="form_p2">
               <label for="add_phone">Téléphone : </label>
               <input type="tel" id="add_phone" name="phone" />
             </div>
-          </div>
-
-          <div class="form_p1">
             <div class="form_p2">
-              <label for="agenda">Premier passage :</label>
-
-              <select name="visit_day_1">
-                <option value="monday">Lundi</option>
-                <option value="tuesday">Mardi</option>
-                <option value="wednesday">Mercredi</option>
-                <option value="thursday">Jeudi</option>
-                <option value="friday">Vendredi</option>
-              </select>
-              <select name="time_1">
-                <option value="8">8 - 10 H</option>
-                <option value="10">10 - 12 H</option>
-                <option value="12">12 - 14 H</option>
-                <option value="14">14 - 16 H</option>
-                <option value="16">16 - 18 H</option>
-              </select>
-            </div>
-
-            <div class="form_p2">
-              <label for="agenda">Deuxieme passage :</label>
-
-              <select name="visit_day_2">
-                <option value="monday">Lundi</option>
-                <option value="tuesday">Mardi</option>
-                <option value="wednesday">Mercredi</option>
-                <option value="thursday">Jeudi</option>
-                <option value="friday">Vendredi</option>
-              </select>
-              <select name="time_2">
-                <option value="8">8 - 10 H</option>
-                <option value="10">10 - 12 H</option>
-                <option value="12">12 - 14 H</option>
-                <option value="14">14 - 16 H</option>
-                <option value="16">16 - 18 H</option>
+              <label for="add_firm">Entreprise : </label>
+              <select
+                @change="selectFirm($event)"
+                @click="FirmChoice"
+                name="firm_id"
+                id="add_firm"
+                class="select-account"
+              >
+                <option
+                  v-for="(firm, index) in firmList"
+                  :key="index"
+                  :value="firm.id"
+                >
+                  {{ firm.name }}
+                </option>
               </select>
             </div>
           </div>
+        </div>
 
+        <!-- champs spécifiques compte membre -->
+        <div v-if="this.accountSelect == 'member'">
           <div class="form_p1">
             <div class="form_p2">
-              <label for="add_siret">Siret :</label>
-              <input type="text" name="siret" id="add_siret" />
-            </div>
-          </div>
-
-          <div class="form_p1">
-            <div class="form_p2">
-              <label for="logo">Logo :</label>
-              <img :src="logoPicture" class="preview" alt="" />
+              <label for="avatar">Avatar :</label>
+              <img :src="avatarPicture" class="preview" alt="" />
               <input
                 type="file"
-                @change="downloadLogo"
-                name="logo"
-                id="logo"
+                @change="downloadAvatar"
+                name="avatar"
                 accept="/*"
                 enctype="multipart/form-data"
               />
             </div>
             <div class="form_p2">
-              <label for="add_color">Couleur de l'entreprise : </label>
-              <select name="color" id="add_color">
-                <option value="color">bleu</option>
-              </select>
+              <label for="add_comment">Commentaire :</label>
+              <textarea
+                type="text"
+                name="add_comment"
+                id="add_comment"
+                class="block_area"
+              ></textarea>
             </div>
           </div>
+        </div>
 
-          <div class="form_p1">
-            <div class="form_p2">
-              <label for="logo">Image actualité :</label>
-              <img :src="imageNews" class="preview" alt="" />
-              <input
-                type="file"
-                @change="downloadImageNews"
-                name="image"
-                id="image"
-                accept="/*"
-                enctype="multipart/form-data"
-              />
-            </div>
-            <div class="form_p2">
-              <label for="title">Titre de l'actualité : </label>
-              <input type="text" name="title" />
-            </div>
+        <div v-if="accountSelect && this.accountSelect != 'choix'">
+          <input id="submit_btn" type="submit" value="Valider" />
+        </div>
+      </div>
+    </form>
+
+    <!-- formulaire compte entreprise -->
+
+    <div class="form" v-show="this.showFirmAccount">
+      <form @submit.prevent="CreateAccountFirm">
+        <div class="form_p1">
+          <div class="form_p2">
+            <label for="name">Nom : </label>
+            <input type="text" id="name" name="name" />
+          </div>
+
+          <div class="form_p2">
+            <label for="email">E-mail : </label>
+            <input type="email" id="email" name="email" v-model="inputEmail" />
+          </div>
+        </div>
+
+        <div class="form_p1">
+          <div class="form_p2">
+            <label for="address">Addresse :</label>
+            <input type="text" name="address" id="address" />
+          </div>
+
+          <div class="form_p2">
+            <label for="add_phone">Téléphone : </label>
+            <input type="tel" id="add_phone" name="phone" />
+          </div>
+        </div>
+
+        <div class="form_p1">
+          <div class="form_p2">
+            <label for="agenda">Premier passage :</label>
+
+            <select name="visit_day_1" class="select-account">
+              <option value="monday">Lundi</option>
+              <option value="tuesday">Mardi</option>
+              <option value="wednesday">Mercredi</option>
+              <option value="thursday">Jeudi</option>
+              <option value="friday">Vendredi</option>
+            </select>
+            <select name="time_1" class="select-account">
+              <option value="8">8 - 10 H</option>
+              <option value="10">10 - 12 H</option>
+              <option value="12">12 - 14 H</option>
+              <option value="14">14 - 16 H</option>
+              <option value="16">16 - 18 H</option>
+            </select>
+          </div>
+
+          <div class="form_p2">
+            <label for="agenda">Deuxieme passage :</label>
+
+            <select name="visit_day_2" class="select-account">
+              <option value="monday">Lundi</option>
+              <option value="tuesday">Mardi</option>
+              <option value="wednesday">Mercredi</option>
+              <option value="thursday">Jeudi</option>
+              <option value="friday">Vendredi</option>
+            </select>
+            <select name="time_2" class="select-account">
+              <option value="8">8 - 10 H</option>
+              <option value="10">10 - 12 H</option>
+              <option value="12">12 - 14 H</option>
+              <option value="14">14 - 16 H</option>
+              <option value="16">16 - 18 H</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form_p1">
+          <div class="form_p2">
+            <label for="add_siret">Siret :</label>
+            <input type="text" name="siret" id="add_siret" />
+          </div>
+        </div>
+
+        <div class="form_p1">
+          <div class="form_p2">
+            <label for="logo">Logo :</label>
+            <img :src="logoPicture" class="preview" alt="" />
+            <input
+              type="file"
+              @change="downloadLogo"
+              name="logo"
+              id="logo"
+              accept="/*"
+              enctype="multipart/form-data"
+            />
           </div>
           <div class="form_p2">
-            <label for="news">Actualité : </label>
-            <textarea type="text" name="news" class="block_area"></textarea>
+            <label for="add_color">Couleur de l'entreprise : </label>
+            <select name="color" id="add_color" class="select-account">
+              <option value="color">bleu</option>
+            </select>
           </div>
+        </div>
 
-          <div>
-            <input id="submit_btn" type="submit" value="Valider" />
+        <div class="form_p1">
+          <div class="form_p2">
+            <label for="logo">Image actualité :</label>
+            <img :src="imageNews" class="preview" alt="" />
+            <input
+              type="file"
+              @change="downloadImageNews"
+              name="image"
+              id="image"
+              accept="/*"
+              enctype="multipart/form-data"
+            />
           </div>
-        </form>
-      </div>
-      <div v-show="this.msg == true" class="msg">Nouveau compte crée !</div>
+          <div class="form_p2">
+            <label for="title">Titre de l'actualité : </label>
+            <input type="text" name="title" />
+          </div>
+        </div>
+        <div class="form_p2">
+          <label for="news">Actualité : </label>
+          <textarea type="text" name="news" class="block_area"></textarea>
+        </div>
+
+        <div>
+          <input id="submit_btn" type="submit" value="Valider" />
+        </div>
+      </form>
     </div>
+    <div v-show="this.msg == true" class="msg">Nouveau compte crée !</div>
   </div>
 </template>
 
-
-
-
 <script>
-import NavTopDeconnexion from "../components/NavTopDeconnexion.vue";
-
 export default {
   inject: ["role"],
   name: "AddAccount",
-  // component
-  components: {
-    NavTopDeconnexion: NavTopDeconnexion,
-  },
-  // data properties
   data() {
     return {
       inputEmail: "",
@@ -308,7 +279,7 @@ export default {
       logoPicture: "",
       avatarPicture: "",
       imageNews: "",
-      showAccount: false,
+      showAccount: true,
       showFirmAccount: false,
       firmList: "",
       success: "",
@@ -316,7 +287,7 @@ export default {
       msg: false,
     };
   },
-  // methodes
+
   methods: {
     //Demande asynchronisée permettant la création du compte et l'envoi des données saisies au serveur API
     async CreateAccountByAdmin(e) {
@@ -456,6 +427,14 @@ export default {
 </script>
 
 <style scoped>
+.content-page-creation {
+  width: 100%;
+  height: 100%;
+  padding: 2% 2%;
+  justify-content: center;
+  text-align: center;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -568,5 +547,12 @@ input:focus {
 
 textarea {
   resize: none;
+}
+
+.select-account {
+  font-size: 16px;
+  padding: 2px;
+  border-radius: 9px;
+  margin-bottom: 5px;
 }
 </style>

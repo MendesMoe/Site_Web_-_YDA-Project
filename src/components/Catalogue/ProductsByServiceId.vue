@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content-page-products-by-service">
     <h1>Produits</h1>
     <div v-for="(element, index) in productsArray" :key="index">
       <Product
@@ -63,25 +63,16 @@ export default {
 </script>
 
 <style scoped>
+.content-page-products-by-service {
+  width: 100%;
+  height: 100%;
+  padding: 2% 2%;
+  justify-content: center;
+  text-align: center;
+}
 img {
   width: 15rem;
   height: 15rem;
-}
-
-.product_card {
-  display: flex;
-  justify-content: space-between;
-  align-content: space-around;
-  align-items: center;
-  margin: 5%;
-  padding: 1%;
-  border: 1px solid #000;
-  border-radius: 20px;
-  box-shadow: 2px 1px 9px 0px black;
-}
-
-.product_card:hover {
-  box-shadow: inset 2px 1px 9px 0px black;
 }
 
 .image {
@@ -103,9 +94,6 @@ img {
   margin: 0px;
 }
 
-.title_description {
-  margin-left: 5%;
-}
 .edit_product {
   display: flex;
   flex-direction: column;

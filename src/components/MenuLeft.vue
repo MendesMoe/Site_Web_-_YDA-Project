@@ -19,7 +19,9 @@
         <router-link class="anim" to="">Agenda</router-link>
       </p>
       <p>
-        <router-link class="anim" to="/creation"> Utilisateurs</router-link>
+        <router-link class="anim" to="/creation">
+          Gestion des comptes</router-link
+        >
       </p>
     </div>
   </div>

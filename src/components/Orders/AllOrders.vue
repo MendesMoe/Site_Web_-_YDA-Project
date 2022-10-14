@@ -18,6 +18,7 @@
             <th>
               <select
                 name="status"
+                class="select-component"
                 id="status"
                 @change="selectedStatus = $event.target.value"
               >
@@ -41,7 +42,9 @@
             :key="index"
           >
             <div v-for="(order, index) in user.orders" :key="index">
-              <td>{{ order.id }}</td>
+              <td>
+                {{ order.id }}
+              </td>
               <td class="selectfirm" @click="getOrdersByFirm(element.id)">
                 {{ element.name }}
               </td>
@@ -185,6 +188,13 @@ export default {
   cursor: pointer;
   border: #ffa500 solid 1px;
 }
+.select-component {
+  font-size: 16px;
+  padding: 2px;
+  margin-top: 5px;
+  border-radius: 9px;
+  margin-bottom: 5px;
+}
 .order_card {
   display: flex;
   flex-direction: column;
@@ -208,6 +218,7 @@ table tr {
   background-color: #fff;
   cursor: pointer;
   width: 100%;
+  align-items: center;
 }
 table th,
 td {
@@ -215,7 +226,7 @@ td {
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd;
   min-width: 150px;
-  max-height: 1550px;
+  max-height: 160px;
   flex-direction: column;
 }
 
