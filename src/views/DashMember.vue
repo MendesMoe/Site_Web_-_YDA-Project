@@ -152,7 +152,7 @@ export default {
 
   async mounted() {
     const url =
-      "http://127.0.0.1:8000/api/users/" + +localStorage.getItem("@id");
+      "http://127.0.0.1:8000/api/users/" + localStorage.getItem("@id");
 
     const options = {
       method: "GET",

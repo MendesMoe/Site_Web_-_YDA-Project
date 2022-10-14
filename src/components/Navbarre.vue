@@ -1,16 +1,6 @@
 <template>
   <!--Component NavBarre MEMBER réutilisable de partout-->
   <div>
-    <div class="nav_primaire">
-      <div class="logo">
-        <img src="../assets/img/images.png" style="width: 200px" />
-      </div>
-      <router-link to="/connexion" @click="clearLocalStorage">
-        <div class="fav_icon">
-          <i class="fas fa-power-off"></i>
-        </div>
-      </router-link>
-    </div>
     <div class="nav_secondaire">
       <nav>
         <ul>

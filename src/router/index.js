@@ -106,7 +106,7 @@ const routes = [
     props: true,
   },
   {
-    path: "/DashMember",
+    path: "/dashMember",
     name: "DashMember",
     component: DashMember,
     props: true,

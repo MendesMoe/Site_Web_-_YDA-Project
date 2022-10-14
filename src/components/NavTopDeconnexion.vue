@@ -3,7 +3,7 @@
   <div class="nav_top">
     <ul>
       <li>
-        <router-link to="/connexion" @click="clearLocalStorage">
+        <router-link to="/" @click="clearLocalStorage">
           <div class="fav_icon">
             <p><i class="fas fa-power-off"></i></p>
           </div>

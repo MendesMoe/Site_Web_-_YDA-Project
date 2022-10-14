@@ -1,13 +1,21 @@
 <template>
   <div class="menu-content">
     <div class="logo">
-      <img src="../assets/img/logo_without_title.png" style="width: 115px" />
+      <img
+        v-if="this.role.value == 'admin'"
+        src="../assets/img/logo_without_title.png"
+        style="width: 115px"
+      />
+      <img v-else src="../assets/img/images.png" style="width: 115px" />
     </div>
     <div class="menu-list">
-      <p>
+      <p v-if="this.role.value == 'admin'">
         <router-link class="anim" to="/dashboard">Home</router-link>
       </p>
-      <p>
+      <p v-if="this.role.value == 'member'">
+        <router-link class="anim" to="/dashMember">Home</router-link>
+      </p>
+      <p v-if="this.role.value == 'admin'">
         <router-link class="anim" to="/AllFirms">Entreprises</router-link>
       </p>
       <p>
@@ -15,20 +23,42 @@
           >Catalogue</router-link
         >
       </p>
-      <p>
+      <p v-if="this.role.value == 'admin'">
         <router-link class="anim" to="">Agenda</router-link>
       </p>
-      <p>
+      <p v-if="this.role.value == 'admin'">
         <router-link class="anim" to="/creation">
           Gestion des comptes</router-link
         >
       </p>
+      <p v-if="this.role.value == 'member'">
+        <router-link class="anim" to="/DashMember">Mes commandes</router-link>
+      </p>
+
+      <p v-if="this.role.value == 'member'">
+        <router-link class="anim" to="/EditProfilMember"
+          >Mon profil</router-link
+        >
+      </p>
+      <p v-if="this.role.value == 'member'">
+        <router-link class="anim" to="/panier">
+          <i class="fas fa-shopping-cart"> Panier </i>
+          <div v-if="notif != null" class="notif">1</div>
+        </router-link>
+      </p>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  inject: ["role"],
+};
+</script>
+
 <style scoped>
 .logo img {
-  margin-top: 2%;
+  margin-top: 9%;
 }
 .menu-content {
   display: flex;

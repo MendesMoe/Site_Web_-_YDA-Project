@@ -54,8 +54,12 @@ export default {
     };
     const response = await fetch(url, options);
     const data = await response.json();
-    //console.log(data);
-    this.servicesArray = data.donnees;
+    console.log("SERVICES API");
+    console.log(data.donnees);
+
+    if (Array.isArray(data.donnees)) {
+      this.servicesArray = data.donnees;
+    }
   },
   /* method au click pour selectionner le bon service avec le bon ID qui renvoie vers la page des produits de ce service selectionné */
 

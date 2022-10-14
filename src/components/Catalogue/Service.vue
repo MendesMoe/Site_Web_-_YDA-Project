@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="radio !== 'inactif' && this.role.value !== 'member'"
+    v-if="radio !== 'inactif' || this.role.value == 'admin'"
     class="service-card"
   >
     <img
