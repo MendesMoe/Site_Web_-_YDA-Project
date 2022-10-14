@@ -1,16 +1,15 @@
 <template>
-  <div class="content-page">
+  <div class="content-page-firms">
     <h2 class="title-page">Entreprises</h2>
     <!-- SEARCH ENTREPRISE -->
     <div class="search-wrapper">
       <input type="text" v-model="search" placeholder="Nom de l'entreprise" />
     </div>
     <!-- END SEARCH ENTREPRISE -->
-
     <!--v-for pour afficher tout les entreprises en BDD -->
-    <table class="array">
-      <thead class="head">
-        <tr class="trHead">
+    <table>
+      <thead>
+        <tr>
           <th>Logo:</th>
 
           <th>Nom:</th>
@@ -25,17 +24,11 @@
 
           <th>Visite 2:</th>
 
-          <th>Modifier/Supprimer</th>
+          <th v-if="this.role.value == 'admin'">Modifier/Supprimer</th>
         </tr>
       </thead>
-
-      <!-- affichage de tous les utilisateurs -->
-
-      <tbody
-        v-for="(entreprise, index) in filteredList"
-        :key="index"
-        class="body"
-      >
+      <!-- affichage des resultats -->
+      <tbody v-for="(entreprise, index) in filteredList" :key="index">
         <tr>
           <td @click="getUsersByFirm(entreprise.id)">
             <img :src="`http://localhost:8000/img/logos/` + entreprise.logo" />
@@ -147,7 +140,7 @@ export default {
 </script>
 
 <style scoped>
-.content-page {
+.content-page-firms {
   width: 100%;
   height: 100%;
   padding: 2% 2%;
@@ -163,32 +156,20 @@ export default {
   border-radius: 3px;
 }
 table {
-  overflow: hidden;
-  width: 100%;
+  width: 90%;
+  height: 90%;
+  align-items: center;
+  overflow-y: scroll;
 }
 
-.arrayUsers .array {
-  border: 1px solid #bdc3d7;
-  text-align: center;
-  vertical-align: middle;
-  /* position: absolute;
-  left: 50%;
-  top: 150%;
-  transform: translate(-50%, -50%); */
-  border-collapse: collapse;
-  width: 100%;
-  height: 200px;
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
-}
-
-.array tr {
+table tr {
   background-color: #f39c11;
   transition: all 0.2s ease-in;
   background-color: #fff;
   cursor: pointer;
 }
 
-.array th,
+table th,
 td {
   padding: 12px;
   border-bottom: 1px solid #ddd;
@@ -196,7 +177,7 @@ td {
   max-height: 30px;
 }
 
-.array .trHead {
+table thead tr {
   background-color: #f39c11;
   font-weight: bold;
   color: #fff;
@@ -223,6 +204,6 @@ i {
 
 /************** CSS SEARCH ****************/
 input[type="text"] {
-  font-size: 24px;
+  font-size: 18px;
 }
 </style>

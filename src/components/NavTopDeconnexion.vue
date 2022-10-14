@@ -3,9 +3,6 @@
   <div class="nav_top">
     <ul>
       <li>
-        <p>Bonjour</p>
-      </li>
-      <li>
         <router-link to="/connexion" @click="clearLocalStorage">
           <div class="fav_icon">
             <p><i class="fas fa-power-off"></i></p>
@@ -44,6 +41,7 @@ export default {
   position: absolute;
   right: 5%;
   font-size: 20px;
+  margin-top: -9px;
 }
 .fav_icon p i {
   margin-left: 8px;

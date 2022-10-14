@@ -1,20 +1,21 @@
 <template>
-  <div>
-    <h2>Voici les commandes en attente</h2>
-    <br />
+  <div class="content-page-order">
+    <h2 class="title-page">Commandes en attente</h2>
+    <!--v-for pour afficher tout les commandes en BDD -->
     <table>
       <thead>
         <tr>
           <div>
-            <td>N°</td>
-            <td>
-              Entreprises : <SelectFirms @change="getFirmValue($event)" />
-            </td>
-            <td>Salarié</td>
-            <td>Total</td>
-            <td>Date création</td>
-            <td>Date dernière modification</td>
-            <td>
+            <th>N°</th>
+            <th>
+              <span>Entreprises </span>
+              <SelectFirms @change="getFirmValue($event)" />
+            </th>
+            <th>Salarié</th>
+            <th>Total</th>
+            <th>Date création</th>
+            <th>Date dernière modification</th>
+            <th>
               <select
                 name="status"
                 id="status"
@@ -26,18 +27,18 @@
                 <option value="terminée">Terminée</option>
                 <option value="annulee">Annulée</option>
               </select>
-            </td>
+            </th>
           </div>
         </tr>
       </thead>
+      <!-- affichage des resultats -->
 
-      <!--v-for pour afficher tout les commandes en BDD -->
-      <div class="tbody">
+      <div>
         <tbody v-for="(element, index) in filterFirms" :key="index">
           <tr
+            id="tr-body-orders"
             v-for="(user, index) in element.users"
             :key="index"
-            :class="index % 2 == 0 ? 'white' : 'grey'"
           >
             <div v-for="(order, index) in user.orders" :key="index">
               <td>{{ order.id }}</td>
@@ -53,8 +54,6 @@
                 {{ moment(order.updated_at).format("DD MMM YYYY, HH:mm ") }}
               </td>
               <td>{{ order.status }}</td>
-
-              <br />
             </div>
           </tr>
         </tbody>
@@ -62,6 +61,7 @@
     </table>
   </div>
 </template>
+
 <script>
 import SelectFirms from "../UI/SelectFirms.vue";
 
@@ -171,6 +171,16 @@ export default {
 </script>
 
 <style scoped>
+.content-page-order {
+  width: 100%;
+  height: 100%;
+  padding: 2% 2%;
+  justify-content: center;
+  text-align: center;
+}
+.title-page {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 .selectfirm:hover {
   cursor: pointer;
   border: #ffa500 solid 1px;
@@ -180,33 +190,42 @@ export default {
   flex-direction: column;
   margin: 2%;
   border-radius: 5px;
-  border: 1px solid black;
+  border: 5px solid black;
   padding: 1%;
 }
-
 .groupeOrders {
   display: flex;
 }
+table {
+  width: 90%;
+  height: 90%;
+  align-items: center;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+table tr {
+  transition: all 0.2s ease-in;
+  background-color: #fff;
+  cursor: pointer;
+  width: 100%;
+}
+table th,
 td {
   padding: 5px;
-  border: #000 solid 1px;
-  min-width: 10rem;
-  max-width: 10rem;
-}
-table {
-  font-size: 1rem;
-  display: flex;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  min-width: 150px;
+  max-height: 1550px;
   flex-direction: column;
-  align-items: center;
 }
-thead {
-  border: solid 3px #ffa500;
+
+table thead tr {
+  background-color: #f39c11;
+  font-weight: bold;
+  color: #fff;
+  width: 100%;
 }
-.tbody {
-  border-left: solid 3px #ffa500;
-  border-bottom: solid 3px #ffa500;
-  border-right: solid 3px #ffa500;
-}
+
 .white {
   background-color: white;
 }

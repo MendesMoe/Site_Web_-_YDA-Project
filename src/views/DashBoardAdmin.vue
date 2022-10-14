@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <AllOrders></AllOrders>
-  </div>
+  <AllOrders></AllOrders>
 </template>
 
 <script>
