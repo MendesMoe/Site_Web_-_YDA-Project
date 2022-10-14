@@ -7,7 +7,7 @@
       class="image-service"
       :src="'http://localhost:8000/img/services/' + previewImage"
     />
-    <div class="title-service">
+    <div class="title-service"></div>
       <h3>{{ name }}</h3>
       <p class="p_container">{{ description_1 }}</p>
       <button @click="showServiceProducts(this.id)">Voir produits</button>
