@@ -1,21 +1,13 @@
 <template>
-  <div>
-    <h1>Listes des entreprises enregistrées</h1>
-
+  <div class="content-page">
+    <h2 class="title-page">Entreprises</h2>
     <!-- SEARCH ENTREPRISE -->
-    <div>
-      <div class="search-wrapper">
-        <input
-          type="text"
-          v-model="search"
-          placeholder=" Nom de l'entreprise ..."
-        />
-      </div>
+    <div class="search-wrapper">
+      <input type="text" v-model="search" placeholder="Nom de l'entreprise" />
     </div>
     <!-- END SEARCH ENTREPRISE -->
 
     <!--v-for pour afficher tout les entreprises en BDD -->
-
     <table class="array">
       <thead class="head">
         <tr class="trHead">
@@ -155,6 +147,21 @@ export default {
 </script>
 
 <style scoped>
+.content-page {
+  width: 100%;
+  height: 100%;
+  padding: 2% 2%;
+  justify-content: center;
+  text-align: center;
+}
+.title-page {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.search-wrapper {
+  margin: 5px 0px;
+  border-radius: 3px;
+}
 table {
   overflow: hidden;
   width: 100%;

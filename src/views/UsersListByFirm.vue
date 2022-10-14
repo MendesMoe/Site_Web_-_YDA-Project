@@ -1,5 +1,5 @@
 <template>
-  <NavbarreAdmin />
+  <NavTopDeconnexion />
   <h2>Compte {{ this.name }}</h2>
 
   <div class="firm_details">
@@ -151,7 +151,7 @@
 </template>
 
 <script>
-import NavbarreAdmin from "../components/NavbarreAdmin.vue";
+import NavTopDeconnexion from "../components/NavTopDeconnexion.vue";
 import moment from "moment";
 export default {
   inject: ["role"],
@@ -163,7 +163,7 @@ export default {
     this.moment = moment;
   },
   components: {
-    NavbarreAdmin: NavbarreAdmin,
+    NavTopDeconnexion: NavTopDeconnexion,
   },
 
   data() {

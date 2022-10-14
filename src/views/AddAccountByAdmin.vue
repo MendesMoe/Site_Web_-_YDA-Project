@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- import de la barre de navigation -->
-    <NavbarreAdmin />
+    <NavTopDeconnexion />
 
     <div class="all">
       <!-- bouton pour affichage des formulaires -->
@@ -290,14 +290,14 @@
 
 
 <script>
-import NavbarreAdmin from "../components/NavbarreAdmin.vue";
+import NavTopDeconnexion from "../components/NavTopDeconnexion.vue";
 
 export default {
   inject: ["role"],
   name: "AddAccount",
   // component
   components: {
-    NavbarreAdmin: NavbarreAdmin,
+    NavTopDeconnexion: NavTopDeconnexion,
   },
   // data properties
   data() {

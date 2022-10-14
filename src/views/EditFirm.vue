@@ -1,5 +1,5 @@
 <template>
-  <NavbarreAdmin />
+  <NavTopDeconnexion />
   <h1>Edition de l'entreprise</h1>
   <span class="green">
     <p v-if="this.success == 200">Edition de l'entreprise réussite</p>
@@ -142,12 +142,12 @@
 </template>
 
 <script>
-import NavbarreAdmin from "../components/NavbarreAdmin.vue";
+import NavTopDeconnexion from "../components/NavTopDeconnexion.vue";
 
 export default {
   inject: ["role"],
   components: {
-    NavbarreAdmin: NavbarreAdmin,
+    NavTopDeconnexion: NavTopDeconnexion,
   },
   props: {
     firmId: String,

@@ -1,5 +1,5 @@
 <template>
-  <!--Component NavBarre réutilisable de partout-->
+  <!--Component NavBarre MEMBER réutilisable de partout-->
   <div>
     <div class="nav_primaire">
       <div class="logo">

@@ -1,5 +1,5 @@
 <template>
-  <NavbarreAdmin />
+  <NavTopDeconnexion />
   <div class="profil">
     <h1>Profil de {{ this.firstname }}</h1>
     <div class="profil">
@@ -93,13 +93,13 @@
 
 <script>
 import Footer from "../components/Footer.vue";
-import NavbarreAdmin from "../components/NavbarreAdmin.vue";
+import NavTopDeconnexion from "../components/NavTopDeconnexion.vue";
 
 export default {
   name: "EditProfil",
   components: {
     Footer: Footer,
-    NavbarreAdmin,
+    NavTopDeconnexion,
   },
 
   props: {

@@ -1,5 +1,5 @@
 <template>
-  <NavbarreAdmin />
+  <NavTopDeconnexion />
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <hello-world msg="Welcome to Your Vue.js App" />
@@ -12,7 +12,7 @@
 
 <script>
 // @ is an alias to /src
-import NavbarreAdmin from "../components/NavbarreAdmin.vue";
+import NavTopDeconnexion from "../components/NavTopDeconnexion.vue";
 import HelloWorld from "../components/HelloWorld.vue";
 import Footer from "../components/Footer.vue";
 
@@ -21,7 +21,7 @@ export default {
   components: {
     HelloWorld,
     Footer,
-    NavbarreAdmin: NavbarreAdmin,
+    NavTopDeconnexion: NavTopDeconnexion,
   },
 };
 </script>

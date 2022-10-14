@@ -1,12 +1,19 @@
 <template>
   <div>
-    <h2>Listes des commandes</h2>
+    <h2>Voici les commandes en attente</h2>
     <br />
     <table>
       <thead>
         <tr>
           <div>
-            <td>Commande n°</td>
+            <td>N°</td>
+            <td>
+              Entreprises : <SelectFirms @change="getFirmValue($event)" />
+            </td>
+            <td>Salarié</td>
+            <td>Total</td>
+            <td>Date création</td>
+            <td>Date dernière modification</td>
             <td>
               <select
                 name="status"
@@ -16,29 +23,28 @@
                 <option value="">Statuts</option>
                 <option value="en cours">En cours</option>
                 <option value="en attente">En attente</option>
-                <option value="terminée">Terminées</option>
+                <option value="terminée">Terminée</option>
+                <option value="annulee">Annulée</option>
               </select>
             </td>
-            <td>Prix total</td>
-            <td>Date création</td>
-            <td>Date dernière modification</td>
-            <td>Entreprises:<SelectFirms @change="getFirmValue($event)" /></td>
-            <td>Nom salarié</td>
           </div>
         </tr>
       </thead>
 
       <!--v-for pour afficher tout les commandes en BDD -->
       <div class="tbody">
-        <tbody
-          class="v-for"
-          v-for="(element, index) in filterFirms"
-          :key="index"
-        >
-          <tr v-for="(user, index) in element.users" :key="index">
+        <tbody v-for="(element, index) in filterFirms" :key="index">
+          <tr
+            v-for="(user, index) in element.users"
+            :key="index"
+            :class="index % 2 == 0 ? 'white' : 'grey'"
+          >
             <div v-for="(order, index) in user.orders" :key="index">
               <td>{{ order.id }}</td>
-              <td>{{ order.status }}</td>
+              <td class="selectfirm" @click="getOrdersByFirm(element.id)">
+                {{ element.name }}
+              </td>
+              <td>{{ user.firstname }} {{ user.lastname }}</td>
               <td>{{ order.total }}€</td>
               <td>
                 {{ moment(order.created_at).format("DD MMM YYYY, HH:mm ") }}
@@ -46,10 +52,8 @@
               <td>
                 {{ moment(order.updated_at).format("DD MMM YYYY, HH:mm ") }}
               </td>
-              <td class="selectfirm" @click="getOrdersByFirm(element.id)">
-                {{ element.name }}
-              </td>
-              <td>{{ user.firstname }} {{ user.lastname }}</td>
+              <td>{{ order.status }}</td>
+
               <br />
             </div>
           </tr>
@@ -176,7 +180,7 @@ export default {
   flex-direction: column;
   margin: 2%;
   border-radius: 5px;
-  border: 2px solid black;
+  border: 1px solid black;
   padding: 1%;
 }
 
@@ -185,13 +189,12 @@ export default {
 }
 td {
   padding: 5px;
-  border: #000 solid 2px;
+  border: #000 solid 1px;
   min-width: 10rem;
   max-width: 10rem;
 }
 table {
   font-size: 1rem;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -203,5 +206,11 @@ thead {
   border-left: solid 3px #ffa500;
   border-bottom: solid 3px #ffa500;
   border-right: solid 3px #ffa500;
+}
+.white {
+  background-color: white;
+}
+.gray {
+  background-color: "F4F4F4";
 }
 </style>

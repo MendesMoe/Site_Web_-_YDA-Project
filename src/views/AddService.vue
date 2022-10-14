@@ -1,6 +1,6 @@
 <template>
   <!-- page d'ajout de types, services ou produits avec conditions d'affichage en fonction du formulaire choisi  -->
-  <NavbarreAdmin />
+  <NavTopDeconnexion />
   <div class="button">
     <button @click="showTypeForm()">Ajouter un type</button>
     <button @click="showServiceForm()">Ajouter un service</button>
@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-import NavbarreAdmin from "../components/NavbarreAdmin.vue";
+import NavTopDeconnexion from "../components/NavTopDeconnexion.vue";
 import AddServices from "../components/AddToCatalogue/AddServices.vue";
 import AddTypes from "../components/AddToCatalogue/AddTypes.vue";
 import AddProducts from "../components/AddToCatalogue/AddProducts.vue";
@@ -31,7 +31,7 @@ export default {
     };
   },
   components: {
-    NavbarreAdmin: NavbarreAdmin,
+    NavTopDeconnexion: NavTopDeconnexion,
     AddServices: AddServices,
     AddTypes: AddTypes,
     AddProducts: AddProducts,

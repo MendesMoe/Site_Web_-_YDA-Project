@@ -1,14 +1,12 @@
 <template>
   <!--page d'afffichage du catalogue des produits avec imports de différent composants-->
   <Navbarre v-if="this.role.value !== 'admin'" />
-  <NavbarreAdmin v-if="this.role.value == 'admin'" />
+  <NavTopDeconnexion v-if="this.role.value == 'admin'" />
   <ProductsByServiceId :servicesId="this.servicesId" />
-  <Footer></Footer>
 </template>
 
 <script>
-import NavbarreAdmin from "../../components/NavbarreAdmin.vue";
-import Footer from "../../components/Footer.vue";
+import NavTopDeconnexion from "../../components/NavTopDeconnexion.vue";
 import ProductsByServiceId from "../../components/Catalogue/ProductsByServiceId.vue";
 import Navbarre from "../../components/Navbarre.vue";
 
@@ -24,8 +22,7 @@ export default {
   },
 
   components: {
-    Footer,
-    NavbarreAdmin,
+    NavTopDeconnexion,
     ProductsByServiceId,
     Navbarre,
   },

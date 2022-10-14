@@ -1,9 +1,25 @@
 <template>
-  <router-view />
+  <div class="container">
+    <div class="menu-left">
+      <MenuLeft />
+    </div>
+    <div class="main">
+      <NavTopDeconnexion />
+      <router-view />
+    </div>
+  </div>
 </template>
+
 <script>
 import { computed } from "vue";
+import NavTopDeconnexion from "./components/NavTopDeconnexion.vue";
+import MenuLeft from "../src/components/MenuLeft.vue";
+
 export default {
+  components: {
+    NavTopDeconnexion,
+    MenuLeft,
+  },
   data() {
     return {
       role: "",
@@ -45,50 +61,33 @@ export default {
 </script>
 
 <style>
-body {
-  margin: 0%;
-  padding: 0%;
-  font-family: "Trebuchet MS";
-}
 #app {
   font-family: Trebuchet MS, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  height: 100vh;
+  width: 100vw;
 }
 
-#nav {
-  padding: 30px;
+.container {
+  font-family: "Trebuchet MS";
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  margin-top: -10px;
+  margin-left: -10px;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.menu-left {
+  width: 18%;
+  height: 100%;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-
-::-webkit-scrollbar {
-  width: 14px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  box-shadow: inset 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #db9024;
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #0f0f0f;
+.main {
+  width: 100%;
+  height: 100%;
+  background: rgb(244, 240, 240);
+  display: flex;
+  flex-direction: column;
+  padding-top: 0%;
 }
 </style>

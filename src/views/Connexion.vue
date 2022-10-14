@@ -29,11 +29,8 @@
   <div v-if="this.success == 500" class="p_red">
     <p>Veuillez renseigner votre e-mail de connexion !</p>
   </div>
-  <Footer />
 </template>
 <script>
-import Footer from "../components/Footer.vue";
-
 export default {
   data() {
     return {
@@ -44,12 +41,8 @@ export default {
     };
   },
 
-  components: {
-    Footer: Footer,
-  },
-
   methods: {
-    //Demande asynchronisée permettant la récupération des identifiants utilisateur via l'API
+    //Demande asynchrone permettant la récupération des identifiants utilisateur via l'API
     async connectUser() {
       const url = "http://127.0.0.1:8000/api/connexion";
       //Options de la requête API

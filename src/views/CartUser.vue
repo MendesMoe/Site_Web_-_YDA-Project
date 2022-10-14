@@ -1,6 +1,6 @@
 <template>
   <Navbarre v-if="this.role.value !== 'admin'" />
-  <NavbarreAdmin v-if="this.role.value == 'admin'" />
+  <NavTopDeconnexion v-if="this.role.value == 'admin'" />
 
   <h1>Panier</h1>
   <h4 v-if="this.status == 200">Commande Validée</h4>
@@ -17,12 +17,12 @@
 
 <script>
 import Panier from "../components/Orders/Panier.vue";
-import NavbarreAdmin from "../components/NavbarreAdmin.vue";
+import NavTopDeconnexion from "../components/NavTopDeconnexion.vue";
 import Navbarre from "../components/Navbarre.vue";
 export default {
   inject: ["role"],
   components: {
-    NavbarreAdmin: NavbarreAdmin,
+    NavTopDeconnexion: NavTopDeconnexion,
     Navbarre: Navbarre,
     Panier: Panier,
   },
