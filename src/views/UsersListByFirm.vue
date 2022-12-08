@@ -19,16 +19,16 @@
       <div class="card">
         <h3>Actualité</h3>
         <div class="news">
-          <div>
-            <img :src="`http://localhost:8000/img/news/` + this.image" />
-          </div>
-          <div>
-            <p>Actualité du moment : {{ this.title }}</p>
+          <img :src="`http://localhost:8000/img/news/` + this.image" />
+          <div class="news-text">
+            <p>{{ this.title }}</p>
             <p>{{ this.news }}</p>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- affichage de toutes les commandes -->
 
     <h3>Listes des commandes</h3>
     <div class="orders">
@@ -280,10 +280,15 @@ export default {
 <style scoped>
 .content-page-users-by-firm {
   width: 100%;
-  height: 90%;
+  height: 99%;
+  padding: 1px 5px;
   align-content: center;
   display: flex;
   flex-direction: column;
+}
+
+.content-page-users-by-firm h3 {
+  font-size: x-large;
 }
 
 h3 {
@@ -295,19 +300,20 @@ h3 {
   flex-direction: row;
   justify-content: space-between;
   max-width: 100%;
+  max-height: 50%;
+  margin-top: 0px;
 }
 .card {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   min-width: 30%;
-  margin: 2%;
 }
 
 .news {
+  justify-content: flex-start;
   display: flex;
   max-width: 80%;
-  padding: 2%;
 }
 
 .arrayUsers .array {
@@ -355,11 +361,16 @@ tr:hover {
 i {
   width: 50px;
 }
-
-.news p {
-  text-align: left;
-  margin-left: 1%;
+.news-text {
+  margin-left: 15px;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
+.news-text p:first-child {
+  font-weight: bold;
+  margin-top: 0px;
+}
+
 .news img {
   width: 150px;
   height: 120px;

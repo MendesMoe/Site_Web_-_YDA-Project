@@ -8,107 +8,102 @@
       :src="'http://localhost:8000/img/services/' + previewImage"
     />
     <div class="title-service"></div>
-      <h3>{{ name }}</h3>
-      <p class="p_container">{{ description_1 }}</p>
-      <button @click="showServiceProducts(this.id)">Voir produits</button>
-      <div v-if="this.role.value == 'admin'" class="buttonedit">
-        <i class="fas fa-pen" @click="showEdit = !showEdit"></i>
+    <h3>{{ name }}</h3>
+    <p class="p_container">{{ description_1 }}</p>
+    <button @click="showServiceProducts(this.id)">Voir produits</button>
+    <div v-if="this.role.value == 'admin'" class="buttonedit">
+      <i class="fas fa-pen" @click="showEdit = !showEdit"></i>
 
-        <i @click="deleteService()" class="far fa-trash-alt"></i>
-      </div>
-      <div v-show="showEdit">
-        <form class="form" @submit.prevent="editService">
+      <i @click="deleteService()" class="far fa-trash-alt"></i>
+    </div>
+    <div v-show="showEdit">
+      <form class="form" @submit.prevent="editService">
+        <div>
+          <label for="name">Nom</label>
+        </div>
+        <div>
+          <input id="name" type="text" v-model="name" name="name" />
+        </div>
+        <div class="child_top">
           <div>
-            <label for="name">Nom</label>
+            <label for="email">Email</label>
           </div>
           <div>
-            <input id="name" type="text" v-model="name" name="name" />
+            <input type="email" id="email" v-model="email" name="email" />
           </div>
-          <div class="child_top">
+        </div>
+        <div class="mid_form">
+          <div class="child_mid">
             <div>
-              <label for="email">Email</label>
+              <label for="phone">Téléphone</label>
             </div>
             <div>
-              <input type="email" id="email" v-model="email" name="email" />
+              <input type="tel" id="phone" name="phone" v-model="phone" />
             </div>
           </div>
-          <div class="mid_form">
-            <div class="child_mid">
-              <div>
-                <label for="phone">Téléphone</label>
-              </div>
-              <div>
-                <input type="tel" id="phone" name="phone" v-model="phone" />
-              </div>
-            </div>
-            <div class="child_mid">
-              <div>
-                <label for="categories">Categorie</label>
-              </div>
-
-              <SelectType />
-            </div>
-          </div>
-          <div class="img_parent">
-            <div class="img_container">
-              <div>
-                <label for="image">Image</label>
-              </div>
-              <div>
-                <input
-                  type="file"
-                  id="image"
-                  @change="uploadImage"
-                  name="image"
-                  class="file"
-                />
-              </div>
+          <div class="child_mid">
+            <div>
+              <label for="categories">Categorie</label>
             </div>
 
-            <div class="img_container">
-              <img :src="previewImage" class="uploading-image" />
-            </div>
+            <SelectType />
           </div>
-          <div class="bot_container">
-            <div class="child_bot">
+        </div>
+        <div class="img_parent">
+          <div class="img_container">
+            <div>
+              <label for="image">Image</label>
+            </div>
+            <div>
               <input
-                type="radio"
-                id="checkbox"
-                class="check"
-                name="status"
-                value="actif"
+                type="file"
+                id="image"
+                @change="uploadImage"
+                name="image"
+                class="file"
               />
-              <label for="checkbox">Produit actif</label>
-            </div>
-
-            <div class="child_bot">
-              <input
-                type="radio"
-                id="checkbox"
-                class="check"
-                name="status"
-                value="inactif"
-              />
-              <label for="checkbox">Produit inactif</label>
             </div>
           </div>
-          <div class="text_container">
-            <label for="description_1">Description</label>
-            <textarea
-              id="description_1"
-              v-model="description_1"
-              name="description_1"
-              class="block_area"
-            ></textarea>
+
+          <div class="img_container">
+            <img :src="previewImage" class="uploading-image" />
+          </div>
+        </div>
+        <div class="bot_container">
+          <div class="child_bot">
+            <input
+              type="radio"
+              id="checkbox"
+              class="check"
+              name="status"
+              value="actif"
+            />
+            <label for="checkbox">Produit actif</label>
           </div>
 
-          <input
-            id="submit_btn"
-            type="submit"
-            value="Enregistrer modification"
-          />
-        </form>
-      </div>
+          <div class="child_bot">
+            <input
+              type="radio"
+              id="checkbox"
+              class="check"
+              name="status"
+              value="inactif"
+            />
+            <label for="checkbox">Produit inactif</label>
+          </div>
+        </div>
+        <div class="text_container">
+          <label for="description_1">Description</label>
+          <textarea
+            id="description_1"
+            v-model="description_1"
+            name="description_1"
+            class="block_area"
+          ></textarea>
+        </div>
+
+        <input id="submit_btn" type="submit" value="Enregistrer modification" />
+      </form>
     </div>
   </div>
 </template>

@@ -7,7 +7,7 @@
           <img src="../assets/img/logo_color.png" alt="" />
         </div>
         <!--EMAIL -->
-        <div v-if="this.success == 500">
+        <div v-if="this.status == 500">
           <p class="p_red">E-mail ou mot de passe invalide</p>
         </div>
         <label for="username">Login</label>
@@ -23,10 +23,10 @@
       </div>
     </form>
   </div>
-  <div v-if="this.success == 200">
+  <div v-if="this.status == 200">
     <p>Vous venez de recevoir un mail pour valider votre compte !</p>
   </div>
-  <div v-if="this.success == 500" class="p_red">
+  <div v-if="this.status == 500" class="p_red">
     <p>Veuillez renseigner votre e-mail de connexion !</p>
   </div>
 </template>
@@ -36,7 +36,7 @@ export default {
     return {
       email: "",
       password: "",
-      success: "",
+      status: "",
       role: "",
     };
   },
@@ -65,7 +65,7 @@ export default {
       const data = await response.json();
       console.log("response connexion");
       console.log(data);
-      this.success = data.status_code;
+      this.status = data.status_code;
       this.role = data.role;
 
       // Sauvegarde du token généré par l'API lors de la connection
@@ -103,7 +103,7 @@ export default {
       const dataMagicLink = await responseMagicLink.json();
       console.log(dataMagicLink);
 
-      this.success = dataMagicLink.status_code;
+      this.status = dataMagicLink.status_code;
     },
   },
   watch: {

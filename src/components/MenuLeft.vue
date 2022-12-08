@@ -40,10 +40,10 @@
           >Mon profil</router-link
         >
       </p>
-      <p v-if="this.role.value == 'member'">
-        <router-link class="anim" to="/panier">
-          <i class="fas fa-shopping-cart"> Panier </i>
-          <div v-if="notif != null" class="notif">1</div>
+      <p v-if="this.role.value == 'member'" class="basket">
+        <router-link class="anim" to="/panier" style="margin=-5px!important;">
+          Panier <i class="fas fa-shopping-cart"></i>
+          <span v-if="notif != null" class="notif">1</span>
         </router-link>
       </p>
     </div>
@@ -53,6 +53,11 @@
 <script>
 export default {
   inject: ["role"],
+  data() {
+    return {
+      notif: localStorage.getItem("@cart"),
+    };
+  },
 };
 </script>
 
@@ -107,6 +112,23 @@ export default {
   content: "";
   animation: btn1 0.5s;
   animation-fill-mode: forwards;
+}
+.basket {
+  margin: 0 3px !important;
+  display: flex;
+  flex-direction: row;
+  min-width: 70px;
+  max-width: 120px;
+}
+.notif {
+  border: 1px;
+  background: rgb(248, 137, 53);
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  margin-left: 2px;
 }
 @keyframes btn1 {
   from {

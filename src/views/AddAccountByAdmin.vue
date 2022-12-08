@@ -438,8 +438,8 @@ export default {
 .form {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 600px;
+  height: 100%;
+  width: 70%;
   margin: auto;
   text-align: initial;
 }

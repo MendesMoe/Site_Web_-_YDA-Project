@@ -123,7 +123,7 @@ li {
 }
 .notif {
   border: 1px;
-  background: rgb(3, 101, 194);
+  background: rgb(248, 137, 53);
   border-radius: 50%;
   width: 20px;
   height: 20px;

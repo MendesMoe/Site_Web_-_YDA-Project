@@ -76,8 +76,8 @@ export default {
   font-family: "Trebuchet MS";
   display: flex;
   flex-direction: row;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   margin-top: -10px;
   margin-left: -10px;
 }
