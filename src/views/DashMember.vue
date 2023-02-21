@@ -1,118 +1,124 @@
 <template>
-  <Navbarre />
+  <div class="altura">
+    <Navbarre />
 
-  <div class="titre-profil"></div>
-  <div class="dpt">
-    <div class="part_one">
-      <div class="date-form">
-        <p class="date">
-          Le
-          {{ this.today }}
-        </p>
-      </div>
-      <div class="card">
-        <!-- Image à la une -->
-        <div class="card-image">
-          <a @click="editFirm">
-            <img
-              :src="`http://localhost:8000/img/avatar/` + this.avatar"
-              alt="Orange"
-            />
-          </a>
-        </div>
-        <!-- Fin de l'image à la une -->
-
-        <!-- Corp de notre carte -->
-        <div class="card-body">
-          <a href="/editProfilMember">
-            <!-- Date de publication de l'article-->
-            <div class="card-date">
-              <time>Coordonnées</time>
-            </div>
-
-            <!-- Titre de l'article -->
-            <div class="card-title">
-              <h3>{{ this.firstname }} {{ this.lastname }}</h3>
-            </div>
-            <!-- Extrait de l'article -->
-            <div class="card-excerpt">
-              <p>
-                Né(e) le : {{ moment(this.birthday).format("DD MMM YYYY ") }}
-              </p>
-              <p>Mail : {{ this.email }}</p>
-              <p>Tel : {{ this.phone }}</p>
-            </div>
-          </a>
-        </div>
-        <!-- Fin du corp de notre carte -->
-      </div>
-
-      <div v-show="this.show" class="edit_firm">
-        <p>
-          <span class="id">{{ this.firmName }}</span>
-        </p>
-        <p class="id">{{ this.firmAddress }}</p>
-        <p class="id">{{ this.firmPhone }}</p>
-        <p class="id">{{ this.firmEmail }}</p>
-      </div>
-    </div>
-
-    <div class="order_part">
-      <div
-        class="order_card"
-        v-for="(element, index) in orderList"
-        :key="index"
-      >
-        <div class="order_card_list">
-          <p>
-            Commande N°:
-            <i
-              ><strong>{{ element.id }}</strong></i
-            ><span
-              ><i
-                ><strong>
-                  du
-                  {{ moment(element.created_at).format("DD MMM YYYY") }}</strong
-                ></i
-              ></span
-            >
-          </p>
-          <p>
-            Prix total :
-            <i
-              ><strong>{{ element.total }}€</strong></i
-            >
-          </p>
-          <p>
-            Status :
-            <span :class="status_part"
-              ><i
-                ><strong>{{ element.status }}</strong></i
-              ></span
-            >
+    <div class="dpt">
+      <div class="part_one">
+        <div class="date-form">
+          <p class="date">
+            Le
+            {{ this.today }}
           </p>
         </div>
-        <div class="odetail_part">
-          <p>Détail Commande :</p>
-          <div
-            class="odetail_card"
-            v-for="(odetail, i) in element.odetails"
-            :key="i"
-          >
+
+        <div class="card">
+          <!-- Image à la une -->
+          <div class="card-image">
+            <a @click="editFirm">
+              <img
+                :src="`http://localhost:8000/img/avatar/` + this.avatar"
+                alt="Orange"
+              />
+            </a>
+          </div>
+          <!-- Fin de l'image à la une -->
+
+          <!-- Corp de notre carte -->
+          <div class="card-body">
+            <a href="/editProfilMember">
+              <!-- Date de publication de l'article-->
+              <div class="card-date">
+                <time>Coordonnées</time>
+              </div>
+
+              <!-- Titre de l'article -->
+              <div class="card-title">
+                <h3>{{ this.firstname }} {{ this.lastname }}</h3>
+              </div>
+              <!-- Extrait de l'article -->
+              <div class="card-excerpt">
+                <p>
+                  Né(e) le : {{ moment(this.birthday).format("DD MMM YYYY ") }}
+                </p>
+                <p>Mail : {{ this.email }}</p>
+                <p>Tel : {{ this.phone }}</p>
+              </div>
+            </a>
+          </div>
+          <!-- Fin du corp de notre carte -->
+        </div>
+
+        <div v-show="this.show" class="edit_firm">
+          <p>
+            <span class="id">{{ this.firmName }}</span>
+          </p>
+          <p class="id">{{ this.firmAddress }}</p>
+          <p class="id">{{ this.firmPhone }}</p>
+          <p class="id">{{ this.firmEmail }}</p>
+        </div>
+      </div>
+      <div class="order_part">
+        <div
+          class="order_card"
+          v-for="(element, index) in orderList"
+          :key="index"
+        >
+          <div class="order_card_list">
             <p>
-              <strong>{{ odetail.name }}</strong>
-
-              Prix : {{ odetail.price_product }}€ Quantité :
-              {{ odetail.qtty }} Total commande : {{ odetail.total_odetail }}€
-              Commentaire : {{ odetail.comments }}
+              Commande N°:
+              <i
+                ><strong>{{ element.id }}</strong></i
+              ><span
+                ><i>
+                  du
+                  <strong>
+                    {{
+                      moment(element.created_at).format("DD MMM YYYY")
+                    }}</strong
+                  ></i
+                ></span
+              >
             </p>
+            <p>
+              Prix total :
+              <i
+                ><strong>{{ element.total }}€</strong></i
+              >
+            </p>
+            <p>
+              Status :
+              <span :class="status_part"
+                ><i
+                  ><strong>{{ element.status }}</strong></i
+                ></span
+              >
+            </p>
+          </div>
+          <div class="odetail_part">
+            <p>Détail Commande :</p>
+            <div
+              class="odetail_card"
+              v-for="(odetail, i) in element.odetails"
+              :key="i"
+            >
+              <p>
+                <strong>{{
+                  odetail.name ? odetail.name : "Produto : "
+                }}</strong>
+
+                Prix : {{ odetail.price_product }}€ Quantité :
+                {{ odetail.qtty }} Total commande : {{ odetail.total_odetail }}€
+                Commentaire : {{ odetail.comments }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div>
-    <h3>VISITES ET LIVRAISONS LES LUNDI ET JEUDI à 11H00</h3>
+
+    <div class="visite">
+      <h3>VISITES ET LIVRAISONS LES LUNDI ET JEUDI à 11H00</h3>
+    </div>
   </div>
 </template>
 <script>
@@ -216,9 +222,20 @@ export default {
   flex-direction: row;
   margin: 10px;
   margin-left: 7%;
+  height: 80%;
 }
+.altura {
+  height: 90%;
+}
+.visite {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
 .part_one {
   margin: 10px;
+  height: 0%;
 }
 
 .edit_firm {
@@ -227,13 +244,13 @@ export default {
 }
 
 .order_part {
-  height: 450px;
+  height: 90%;
   padding: 5px;
   margin: 10px;
   margin-top: 60px;
   border-radius: 5px;
 
-  background-color: rgba(139, 177, 189, 0.6);
+  background-color: rgba(164, 201, 212, 0.6);
   box-shadow: 0px 5px 20px #999;
   overflow: scroll;
   display: flex;
@@ -263,7 +280,8 @@ export default {
 .odetail_part {
   overflow: scroll;
   height: 100%;
-  background-color: rgba(139, 177, 189, 0.3);
+  background-color: rgba(212, 233, 239, 0.3);
+  padding: 1%;
 }
 
 .odetail_part p {
@@ -283,6 +301,7 @@ export default {
   background-color: white; /*3*/
   box-shadow: 0px 5px 20px #999; /*4*/
   border-radius: 5px;
+  height: 90%;
 }
 .card a {
   /*5*/
@@ -291,7 +310,7 @@ export default {
 }
 .card:hover .card-image img {
   /*6*/
-  width: 70%;
+  width: 90%;
   filter: grayscale(0);
 }
 .card-image {
@@ -324,6 +343,7 @@ export default {
 .card-title,
 .card-excerpt {
   font-family: "Playfair Display", serif;
+  font-size: 20px;
 }
 
 .card-date,

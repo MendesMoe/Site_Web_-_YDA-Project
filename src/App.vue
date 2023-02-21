@@ -54,7 +54,7 @@ export default {
 
     if (response.status !== 200) {
       localStorage.removeItem("@token");
-      this.$router.replace("/connexion");
+      this.$router.replace("/");
     } else {
       const data = await response.json();
       this.role = data.role;

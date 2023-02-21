@@ -5,8 +5,10 @@
   >
     <img
       class="image-service"
-      :src="'http://localhost:8000/img/services/' + previewImage"
+      :src="'http://localhost:8000/img/avatar/' + previewImage"
+      alt="imagem do servico"
     />
+
     <div class="title-service"></div>
     <h3>{{ name }}</h3>
     <p class="p_container">{{ description_1 }}</p>
@@ -240,8 +242,8 @@ export default {
 }
 
 .image-service {
-  width: 100%;
-  height: 70%;
+  width: 70%;
+  height: 50%;
 }
 
 .title-service {
@@ -257,15 +259,16 @@ export default {
 
 button {
   border-radius: 5px;
-  background-color: #ffffff;
-  color: black;
+  background-color: #050338;
+  color: rgb(249, 244, 244);
   cursor: pointer;
+  margin-bottom: 1%;
 }
 img {
   margin-top: 10px;
   width: 10rem;
   height: 10rem;
-  border-radius: 50%;
+  border-radius: 40%;
 }
 
 .buttonedit {

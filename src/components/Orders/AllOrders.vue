@@ -34,33 +34,31 @@
       </thead>
       <!-- affichage des resultats -->
 
-      <div>
-        <tbody v-for="(element, index) in filterFirms" :key="index">
-          <tr
-            id="tr-body-orders"
-            v-for="(user, index) in element.users"
-            :key="index"
-          >
-            <div v-for="(order, index) in user.orders" :key="index">
-              <td>
-                {{ order.id }}
-              </td>
-              <td class="selectfirm" @click="getOrdersByFirm(element.id)">
-                {{ element.name }}
-              </td>
-              <td>{{ user.firstname }} {{ user.lastname }}</td>
-              <td>{{ order.total }}€</td>
-              <td>
-                {{ moment(order.created_at).format("DD MMM YYYY, HH:mm ") }}
-              </td>
-              <td>
-                {{ moment(order.updated_at).format("DD MMM YYYY, HH:mm ") }}
-              </td>
-              <td>{{ order.status }}</td>
-            </div>
-          </tr>
-        </tbody>
-      </div>
+      <tbody v-for="(element, index) in filterFirms" :key="index">
+        <tr
+          id="tr-body-orders"
+          v-for="(user, index) in element.users"
+          :key="index"
+        >
+          <div v-for="(order, index) in user.orders" :key="index">
+            <td>
+              {{ order.id }}
+            </td>
+            <td class="selectfirm" @click="getOrdersByFirm(element.id)">
+              {{ element.name }}
+            </td>
+            <td>{{ user.firstname }} {{ user.lastname }}</td>
+            <td>{{ order.total }}€</td>
+            <td>
+              {{ moment(order.created_at).format("DD MMM YYYY, HH:mm ") }}
+            </td>
+            <td>
+              {{ moment(order.updated_at).format("DD MMM YYYY, HH:mm ") }}
+            </td>
+            <td>{{ order.status }}</td>
+          </div>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>
@@ -103,28 +101,11 @@ export default {
     const response = await fetch(url, options);
     // la récupération des data stockées dans l'API
     const data = await response.json();
-    this.ordersList = data;
+    this.ordersList = data[0];
     console.log("ordersLIST in AllOrders");
     console.log(this.ordersList);
-
-    ////
-
-    /*requete pour récuperer au montage tout les entreprises, et les users avec leurs commandes en BDD*/
-    const urls = "http://127.0.0.1:8000/api/orders";
-    //Options de la requête API
-    const option = {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("@token"),
-      },
-    };
-    // va chercher les options de l'API
-    const retour = await fetch(urls, option);
-    // la récupération des data stockées dans l'API
-    const datas = await retour.json();
-    this.orderstatus = datas.donnees;
+    console.log(data[0]);
   },
-
   methods: {
     /*récupération de l'event change sur le select pour la fonction de filtre ci dessous*/
     getFirmValue(event) {
@@ -225,8 +206,8 @@ td {
   padding: 5px;
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd;
-  min-width: 150px;
-  max-height: 160px;
+  min-width: 180px;
+  max-height: 200px;
   flex-direction: column;
 }
 
@@ -235,6 +216,15 @@ table thead tr {
   font-weight: bold;
   color: #fff;
   width: 100%;
+}
+
+table tbody {
+  width: 100%;
+}
+
+table tbody {
+  min-width: 180px;
+  max-height: 200px;
 }
 
 .white {

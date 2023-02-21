@@ -2,7 +2,7 @@
   <div class="form_connexion">
     <!--FORM -->
     <form @submit.prevent="connectUser()">
-      <div class="inside_form">
+      <div class="items_form">
         <div class="img_container">
           <img src="../assets/img/logo_color.png" alt="" />
         </div>
@@ -22,12 +22,10 @@
         <input id="submit_btn" type="submit" value="Connexion" />
       </div>
     </form>
-  </div>
-  <div v-if="this.status == 200">
-    <p>Vous venez de recevoir un mail pour valider votre compte !</p>
-  </div>
-  <div v-if="this.status == 500" class="p_red">
-    <p>Veuillez renseigner votre e-mail de connexion !</p>
+
+    <div v-if="this.status == 200">
+      <p>Vous venez de recevoir un mail pour valider votre compte !</p>
+    </div>
   </div>
 </template>
 <script>
@@ -44,34 +42,27 @@ export default {
   methods: {
     //Demande asynchrone permettant la récupération des identifiants utilisateur via l'API
     async connectUser() {
-      const url = "http://127.0.0.1:8000/api/connexion";
-      //Options de la requête API
+      const url = "http://127.0.0.1:8000/api/login";
       const options = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-
         body: JSON.stringify({
           email: this.email,
           password: this.password,
         }),
       };
-      // création de la const de réponse qui va chercher les options de l'API
+
       const response = await fetch(url, options);
-      console.log(response);
-      // Création de la const data qui nous permet la récupération des data stockées dans l'API
       const data = await response.json();
-      console.log("response connexion");
-      console.log(data);
+
       this.status = data.status_code;
       this.role = data.role;
 
       // Sauvegarde du token généré par l'API lors de la connection
-
-      //Si le status renvoyé par l'API est 200 alors on redirige vers la page utilisateur
-      if (data.status_code == 200) {
+      if (data.status_code === 200) {
         localStorage.setItem("@token", data.access_token);
         localStorage.setItem("@id", data.id);
         if (this.role == "admin") {
@@ -116,19 +107,25 @@ export default {
 </script>
 <style scoped>
 .form_connexion {
-  width: 100%;
-}
-form {
+  width: 40%;
+  height: 60%;
   margin: auto;
+}
+.items_form {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 .p_red {
   color: red;
 }
 
 input {
-  width: 50%;
-  height: 30px;
-  margin: 15px auto;
+  width: 100%;
+  height: 20%;
+  margin: 2% 0%;
   border: none;
   border-radius: 5px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
@@ -140,12 +137,12 @@ input:focus {
   outline: none;
 }
 label {
+  height: 20%;
   text-align: left;
-  margin: auto;
+  margin: 2% 0%;
 }
 #submit_btn {
   width: 25%;
-  margin-top: 20px;
   color: #0f0f0f;
   background: #db9024;
   cursor: pointer;
@@ -153,6 +150,7 @@ label {
   transition: background 1s;
   height: 40px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  margin-left: 38%;
 }
 #submit_btn:hover {
   color: #0f0f0f;
@@ -161,14 +159,8 @@ label {
 }
 
 .img_container img {
-  width: 175px;
-  margin: 30px;
-}
-.inside_form {
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-  margin: auto;
-  border-radius: 20%;
+  width: 20%;
+  margin-left: 40%;
+  margin-bottom: 10%;
 }
 </style>
